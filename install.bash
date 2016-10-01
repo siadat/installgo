@@ -80,7 +80,7 @@ main() {
   cat >> $profile << EndOfMsg
 export GOROOT=$dir
 export GOPATH=$gopath
-export PATH=\$PATH:$dir/go/bin:\$GOPATH/bin
+export PATH=\$PATH:$dir/bin:\$GOPATH/bin
 EndOfMsg
   echo "Added paths to $profile"
 }
