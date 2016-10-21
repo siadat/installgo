@@ -52,7 +52,7 @@ discover_goarch() {
 main() {
   local goos=$(discover_goos)
   local goarch=$(discover_goarch)
-  local version=1.7.1
+  local version=$1
   local url="https://storage.googleapis.com/golang/go$version.$goos-$goarch.tar.gz"
   local gopath='$HOME/go'
   local profile=~/.bashrc
@@ -85,5 +85,9 @@ EndOfMsg
   echo "Added paths to $profile"
 }
 
-main
+if [ "$1" = "" ]; then
+  echo "Usage: $0 1.7.1"
+  exit 1
+fi
+main $1
 echo "Close and reopen your terminal and run 'go' to test your installation!"
