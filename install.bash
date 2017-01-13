@@ -49,25 +49,40 @@ discover_goarch() {
   esac
 }
 
+discover_shell_rc() {
+  case $(echo $SHELL) in
+    "bash")
+      echo -n "~/.bashrc"
+      ;;
+    "/bin/bash")
+      echo -n "~/.bashrc"
+      ;;
+    "zsh")
+      echo -n "~/.zshrc"
+      ;;
+    "/bin/zsh")
+      echo -n "~/.zshrc"
+      ;;
+    *)
+      echo "error: $(echo $SHELL) is not supported at the moment." 1>&2
+      echo "error: Pull requests are welcome!" 1>&2
+      echo "error: https://github.com/siadat/installgo" 1>&2
+      exit 1
+      ;;
+  esac
+}
+
 main() {
   local goos=$(discover_goos)
   local goarch=$(discover_goarch)
   local version=$1
   local url="https://storage.googleapis.com/golang/go$version.$goos-$goarch.tar.gz"
   local gopath='$HOME/go'
-  local profile=~/.bashrc
+  local profile=$(discover_shell_rc)
   local dir=~/go$version
 
   if [ -d $dir ]; then
     echo "error: $dir already exists" 1>&2
-    exit 1
-  fi
-
-  # TODO(sina): support other shells
-  if [ ! -f $profile ]; then
-    echo "error: Only bash is supported at the moment." 1>&2
-    echo "error: Send a pull request to support your shells!" 1>&2
-    echo "error: https://github.com/siadat/installgo" 1>&2
     exit 1
   fi
 
