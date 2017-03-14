@@ -9,7 +9,7 @@ fetch() {
   if hash wget 2> /dev/null ; then
     wget -c -O "$file" "$url"
   else
-    curl -O "$file" "$url"
+    curl --output "$file" "$url"
   fi
 }
 
