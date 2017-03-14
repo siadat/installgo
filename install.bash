@@ -52,16 +52,16 @@ discover_goarch() {
 discover_shell_rc() {
   case $(echo $SHELL) in
     "bash")
-      echo -n "~/.bashrc"
+      echo -n ~/.bashrc
       ;;
     "/bin/bash")
-      echo -n "~/.bashrc"
+      echo -n ~/.bashrc
       ;;
     "zsh")
-      echo -n "~/.zshrc"
+      echo -n ~/.zshrc
       ;;
     "/bin/zsh")
-      echo -n "~/.zshrc"
+      echo -n ~/.zshrc
       ;;
     *)
       echo "error: $(echo $SHELL) is not supported at the moment." 1>&2
